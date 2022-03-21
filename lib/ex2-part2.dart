@@ -141,14 +141,21 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _calendar,
               child: Text('calendar'),
             ),
+            Text(""),
             ElevatedButton(
               onPressed: _calendar2,
               child: Text('calendar2'),
             ),
+            Text(""),
             ElevatedButton(
-              onPressed: _diff(_date,_date2),
+              onPressed: () {
+                _diff(_date, _date2);
+
+              },
+
               child: Text('calcule diff'),
             ),
+            Text(""),
             Text(
 
               'Difference entre les dates: $date_dif',
