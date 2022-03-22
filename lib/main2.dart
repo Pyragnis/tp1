@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.pink,
       ),
-      home: const MyHomePage(title: 'Flutter Demo date page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -50,28 +50,33 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  DateTime _date = DateTime(2020, 11, 17 , DateTime.now().hour , DateTime.now().minute , DateTime.now().second);
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+      if(_counter > 10){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const FirstRoute ()),
+        );
 
-  void _calendar() async {
-    final DateTime? Date = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: DateTime(2001, 1),
-      lastDate: DateTime(2022, 7),
-      helpText: 'Select a date beautiful guy',
+      }
+    });
+  }
 
-    );
-    if (Date != null) {
-      setState(() {
-        _date = DateTime (DateTime.now().year - Date.year,DateTime.now().month - Date.month,DateTime.now().day - Date.day, DateTime.now().hour,DateTime.now().minute,DateTime.now().second );
-        //_date.hour = DateTime.now().hour ;
-        //_date.minute = DateTime.now().minute ;
-        //_date.second = DateTime.now().second ;
-      });
-      //DateTime _birth = DateTime (DateTime.now().year - Date.year,DateTime.now().month - Date.month,DateTime.now().day - Date.day, DateTime.now().hour,DateTime.now().minute,DateTime.now().second );
-
-
-    }
+  void _decreaseCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter--;
+    });
   }
 
   @override
@@ -108,21 +113,99 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              onPressed: _calendar,
-              child: Text('calendar'),
-            ),
-            Text(""),
-            Text(
+            Card(
 
-              'votre date de naissance: $_date',
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: _incrementCounter,
+                    child: Text('+'),
+                  ),
+
+                  Card(
+                    child : Column(
+                      children:[
+                        Text(
+                          '$_counter',
+                          style: TextStyle(
+                            fontSize: 50,
+                          ),
+
+                        ),
+                      ],
+
+                    ),
+
+                  ),
+                  ElevatedButton(
+
+                    onPressed: _decreaseCounter,
+                    child: Text('-'),
+                  ),
+
+
+
+
+
+
+
+
+                ],
+
+
+
+
+              ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             ),
 
-          ],
+          ]
+
+
+
+
         ),
       ),
 
       // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class FirstRoute extends StatelessWidget {
+  const FirstRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('hello world'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('hello world'),
+          onPressed: () {
+            // Navigate to second route when tapped.
+          },
+        ),
+      ),
     );
   }
 }
