@@ -180,13 +180,19 @@ class _HomePageState extends State<HomePage> {
                   if (itemKey != null) {
                     _updateItem(itemKey, {
                       'Entreprise': _EntrepriseController.text.trim(),
-                      'Salaire': _SalaireController.text.trim()
+                      'Salaire': _SalaireController.text.trim(),
+                      "Statue": _ChoixController.text.trim(),
+                      "SalaireNet":_SalairenetController.text.trim(),
+                      "Commentaire":_CommentaireController.text.trim()
                     });
                   }
 
                   // Clear the text fields
                   _EntrepriseController.text = '';
                   _SalaireController.text = '';
+                  _ChoixController.text = '';
+                 _SalairenetController.text = '';
+                  _CommentaireController.text = '';
 
                   Navigator.of(context).pop(); // Close the bottom sheet
                 },
@@ -219,12 +225,13 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (_, index) {
             final currentItem = _items[index];
             return Card(
-              color: Colors.orange.shade100,
+              color: Colors.blue,
               margin: const EdgeInsets.all(10),
               elevation: 3,
               child: ListTile(
                   title: Text(currentItem['Entreprise']),
                   subtitle: Text(currentItem['Salaire'].toString()),
+
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
