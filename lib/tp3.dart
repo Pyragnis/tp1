@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               TextField(
                 controller: _EntrepriseController,
-                decoration: const InputDecoration(hintText: 'Entreprise'),
+                decoration: const InputDecoration(hintText: 'Entreprise :'),
               ),
               const SizedBox(
                 height: 10,
@@ -137,10 +137,31 @@ class _HomePageState extends State<HomePage> {
               TextField(
                 controller: _SalaireController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(hintText: 'Salaire'),
+                decoration: const InputDecoration(hintText: 'Salaire :'),
               ),
               const SizedBox(
                 height: 20,
+              ),
+              TextField(
+                controller: _ChoixController,
+                decoration: const InputDecoration(hintText: 'Choix Statue :'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextField(
+                controller: _SalairenetController,
+                decoration: const InputDecoration(hintText: 'Salaire Net : '),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextField(
+                controller: _CommentaireController,
+                decoration: const InputDecoration(hintText: 'Commentaire :'),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -148,7 +169,10 @@ class _HomePageState extends State<HomePage> {
                   if (itemKey == null) {
                     _createItem({
                       "Entreprise": _EntrepriseController.text,
-                      "Salaire": _SalaireController.text
+                      "Salaire": _SalaireController.text,
+                      "Statue": _ChoixController.text,
+                      "SalaireNet":_SalairenetController.text,
+                      "Commentaire":_CommentaireController.text
                     });
                   }
 
