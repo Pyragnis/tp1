@@ -250,9 +250,10 @@ class _HomePageState extends State<HomePage> {
             );
           }),
       // Add new item button
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showForm(context, null),
-        child: const Icon(Icons.add),
+        icon: Icon(Icons.cookie),
+        label: Text("nouveau"),
       ),
     );
   }
