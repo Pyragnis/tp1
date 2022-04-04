@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   void _refreshItems() {
     final data = _shoppingBox.keys.map((key) {
       final value = _shoppingBox.get(key);
-      return {"key": key, "Entreprise": value['Entreprise'], "Salaire": value['Salaire'],"Statue": value['Statue'],"Salaire mensuel":value['SalaireNet'],"Commentaire":value['Commentaire']};
+      return {"key": key, "Entreprise": value['Entreprise'], "Salaire": value['Salaire'],"Statue": value['Statue'],"SalaireNet":value['SalaireNet'],"Commentaire":value['Commentaire']};
     }).toList();
 
     setState(() {
@@ -168,11 +168,11 @@ class _HomePageState extends State<HomePage> {
                   // Save new item
                   if (itemKey == null) {
                     _createItem({
-                      "Entreprise": _EntrepriseController.text,
-                      "Salaire": _SalaireController.text,
-                      "Statue": _ChoixController.text,
-                      "SalaireNet":_SalairenetController.text,
-                      "Commentaire":_CommentaireController.text
+                      'Entreprise': _EntrepriseController.text,
+                      'Salaire': _SalaireController.text,
+                      'Statue': _ChoixController.text,
+                      'SalaireNet':_SalairenetController.text,
+                      'Commentaire':_CommentaireController.text,
                     });
                   }
 
@@ -181,9 +181,9 @@ class _HomePageState extends State<HomePage> {
                     _updateItem(itemKey, {
                       'Entreprise': _EntrepriseController.text.trim(),
                       'Salaire': _SalaireController.text.trim(),
-                      "Statue": _ChoixController.text.trim(),
-                      "SalaireNet":_SalairenetController.text.trim(),
-                      "Commentaire":_CommentaireController.text.trim()
+                      'Statue': _ChoixController.text.trim(),
+                      'SalaireNet':_SalairenetController.text.trim(),
+                      'Commentaire':_CommentaireController.text.trim()
                     });
                   }
 
@@ -229,8 +229,8 @@ class _HomePageState extends State<HomePage> {
               margin: const EdgeInsets.all(10),
               elevation: 3,
               child: ListTile(
-                  title: Text(currentItem['Entreprise']),
-                  subtitle: Text(currentItem['Salaire'].toString()),
+                  title: Text("entreprise : " + currentItem['Entreprise']),
+                  subtitle: Text("salaire : " + currentItem['Salaire'].toString() + '\n' +"Statue : "+ currentItem['Statue'].toString() + '\n' +"Salaire Net : "+ currentItem['SalaireNet'].toString() + '\n' +"Commentaire :"+ currentItem['Commentaire'].toString()),
 
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
