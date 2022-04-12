@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
 
     // Display a snackbar
     ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('An item has been deleted')));
+        const SnackBar(content: Text('un job a été suprimer')));
   }
 
   // TextFields' controllers
