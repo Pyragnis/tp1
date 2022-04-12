@@ -49,10 +49,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+//initialise les 2 date de base
   DateTime _date = DateTime(2020, 11, 17 , DateTime.now().hour , DateTime.now().minute , DateTime.now().second);
   DateTime _date2 = DateTime(2020, 11, 17 , DateTime.now().hour , DateTime.now().minute , DateTime.now().second);
   String date_dif = "" ;
+  //cree le premier calendrier
   void _calendar() async {
     final DateTime? Date = await showDatePicker(
       context: context,
@@ -74,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     }
   }
+  //cree le deuxieme calendrier
   void _calendar2() async {
     final DateTime? Date = await showDatePicker(
       context: context,
@@ -95,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     }
   }
+  //fonction qui calcule la difference entre les 2 date
    _diff(_date,_date2){
     DateTime _diffe = DateTime(_date.year - _date2.year,_date.month - _date2.month, _date.day - _date2.day , _date.hour - _date2.hour , _date.minute - _date2.minute, _date.second - _date2.second);
     setState(() {
