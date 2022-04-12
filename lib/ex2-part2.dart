@@ -142,12 +142,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: _calendar,
-              child: Text('calendar'),
+              child: Text('calendar' + 'date 1 : $_date'),
             ),
             Text(""),
             ElevatedButton(
               onPressed: _calendar2,
-              child: Text('calendar2'),
+              child: Text('calendar2' + 'date 2 : $_date2'),
             ),
             Text(""),
             ElevatedButton(

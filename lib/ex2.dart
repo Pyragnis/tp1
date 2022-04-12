@@ -74,6 +74,25 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void _calendar2() async {
+    final DateTime? Date = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(2001, 1),
+      lastDate: DateTime(2022, 7),
+      helpText: 'Select a date beautiful guy',
+
+    );
+    if (Date != null) {
+      setState(() {
+        _date = Date;
+        //_date.hour = DateTime.now().hour ;
+        //_date.minute = DateTime.now().minute ;
+        //_date.second = DateTime.now().second ;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -109,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: _calendar,
+              onPressed: _calendar2,
               child: Text('calendar'),
             ),
             Text(""),
