@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.green,
       ),
       home: const MyHomePage(title: 'Flutter Demo date page'),
     );
@@ -98,11 +98,23 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
   //fonction qui calcule la difference entre les 2 date
-   _diff(_date,_date2){
-    DateTime _diffe = DateTime(_date.year - _date2.year,_date.month - _date2.month, _date.day - _date2.day , _date.hour - _date2.hour , _date.minute - _date2.minute, _date.second - _date2.second);
-    setState(() {
-      date_dif = _diffe.toString();
-    });
+    Duration _date3 = Duration.zero;
+  int anne = 0;
+  int mois = 0;
+  int jour = 0;
+
+   void _diff(){
+     setState(() {
+       _date3 = _date2.difference(_date);
+       print(_date3);
+       print(_date);
+       print(_date2);
+
+       anne = _date3.inDays ~/ 365;
+       mois = (_date3.inDays - (365 * anne)) ~/31;
+       jour = _date3.inDays - (365 * anne) - (mois * 31);
+
+     });
 
   }
 
@@ -142,26 +154,24 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: _calendar,
-              child: Text('calendar' + 'date 1 : $_date'),
+              child: Text('calendar' +" "+ 'date 1 : $_date'),
             ),
             Text(""),
             ElevatedButton(
               onPressed: _calendar2,
-              child: Text('calendar2' + 'date 2 : $_date2'),
+              child: Text('calendar2' +" "+ 'date 2 : $_date2'),
             ),
             Text(""),
             ElevatedButton(
-              onPressed: () {
-                _diff(_date, _date2);
+              onPressed:_diff,
 
-              },
-
-              child: Text('calcule diff'),
+              child: Text('calcule diff :'+" "+" année : $anne" + " " +"mois : $mois" +" "+"jours : $jour"),
             ),
             Text(""),
+
             Text(
 
-              'votre age en forme de date : $date_dif',
+              'nombre heure total : $_date3',
             ),
           ],
         ),
