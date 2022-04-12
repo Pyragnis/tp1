@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   DateTime _date = DateTime(2020, 11, 17 , DateTime.now().hour , DateTime.now().minute , DateTime.now().second);
-
+    // fonction qui permet de faire les paramètre de base du calendrier
   void _calendar() async {
     final DateTime? Date = await showDatePicker(
       context: context,
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
       lastDate: DateTime(2022, 7),
       helpText: 'Select a date beautiful guy',
 
-    );
+    ); //fonction qui cree le tableau de date
     if (Date != null) {
       setState(() {
         _date = DateTime (DateTime.now().year - Date.year,DateTime.now().month - Date.month,DateTime.now().day - Date.day, DateTime.now().hour,DateTime.now().minute,DateTime.now().second );
