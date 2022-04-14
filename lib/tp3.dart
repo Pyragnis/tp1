@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter/services.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +14,7 @@ void main() async {
 
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -52,7 +55,7 @@ class _HomePageState extends State<HomePage> {
   void _refreshItems() {
     final data = _shoppingBox.keys.map((key) {
       final value = _shoppingBox.get(key);
-      return {"key": key, "Entreprise": value['Entreprise'], "Salaire": value['Salaire'],"Statue": value['Statue'],"SalaireNet":value['SalaireNet'],"Commentaire":value['Commentaire']};
+      return {"key": key, "Entreprise": value['Entreprise'], "Salaire": value['Salaire'],"SalaireNet":value['SalaireNet'],"Commentaire":value['Commentaire']};
     }).toList();
 
     setState(() {
@@ -93,7 +96,6 @@ class _HomePageState extends State<HomePage> {
   // TextFields' controllers
   final TextEditingController _EntrepriseController = TextEditingController();
   final TextEditingController _SalaireController = TextEditingController();
-  final TextEditingController _ChoixController = TextEditingController();
   final TextEditingController _SalairenetController = TextEditingController();
   final TextEditingController _CommentaireController = TextEditingController();
 
@@ -108,7 +110,6 @@ class _HomePageState extends State<HomePage> {
       _items.firstWhere((element) => element['key'] == itemKey);
       _EntrepriseController.text = existingItem['Entreprise'];
       _SalaireController.text = existingItem['Salaire'];
-      _ChoixController.text = existingItem['Statue'];
       _SalairenetController.text = existingItem['SalaireNet'];
       _CommentaireController.text = existingItem['Commentaire'];
     }
@@ -138,16 +139,22 @@ class _HomePageState extends State<HomePage> {
                 controller: _SalaireController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(hintText: 'Salaire :'),
+                inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               ),
               const SizedBox(
                 height: 20,
               ),
-              TextField(
-                controller: _ChoixController,
-                decoration: const InputDecoration(hintText: 'Choix Statue :'),
-              ),
               const SizedBox(
                 height: 10,
+              ),
+
+              SelectFormField(
+                type: SelectFormFieldType.dropdown, // or can be dialog
+                initialValue: 'circle',
+                labelText: 'cadre/non_cadre',
+                items: _items,
+                onChanged: (val) => print(val),
+                onSaved: (val) => print(val),
               ),
               TextField(
                 controller: _SalairenetController,
@@ -170,7 +177,6 @@ class _HomePageState extends State<HomePage> {
                     _createItem({
                       'Entreprise': _EntrepriseController.text,
                       'Salaire': _SalaireController.text,
-                      'Statue': _ChoixController.text,
                       'SalaireNet':_SalairenetController.text,
                       'Commentaire':_CommentaireController.text,
                     });
@@ -181,7 +187,6 @@ class _HomePageState extends State<HomePage> {
                     _updateItem(itemKey, {
                       'Entreprise': _EntrepriseController.text.trim(),
                       'Salaire': _SalaireController.text.trim(),
-                      'Statue': _ChoixController.text.trim(),
                       'SalaireNet':_SalairenetController.text.trim(),
                       'Commentaire':_CommentaireController.text.trim()
                     });
@@ -190,7 +195,6 @@ class _HomePageState extends State<HomePage> {
                   // Clear the text fields
                   _EntrepriseController.text = '';
                   _SalaireController.text = '';
-                  _ChoixController.text = '';
                  _SalairenetController.text = '';
                   _CommentaireController.text = '';
 
@@ -230,7 +234,7 @@ class _HomePageState extends State<HomePage> {
               elevation: 3,
               child: ListTile(
                   title: Text("entreprise : " + currentItem['Entreprise']),
-                  subtitle: Text("salaire : " + currentItem['Salaire'].toString() + '\n' +"Statue : "+ currentItem['Statue'].toString() + '\n' +"Salaire Net : "+ currentItem['SalaireNet'].toString() + '\n' +"Commentaire :"+ currentItem['Commentaire'].toString()),
+                  subtitle: Text("salaire : " + currentItem['Salaire'].toString() + '\n' +"Salaire Net : "+ currentItem['SalaireNet'].toString() + '\n' +"Commentaire :"+ currentItem['Commentaire'].toString()),
 
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

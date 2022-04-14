@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed:_diff,
 
-              child: Text('calcule diff :'+" "+" année : $anne" + " " +"mois : $mois" +" "+"jours : $jour"),
+              child: Text('calcule diff :'+" "+" jours : $jour" + " " +"mois : $mois" +" "+"Année : $anne"),
             ),
             Text(""),
 
